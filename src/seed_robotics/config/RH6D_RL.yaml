@@ -1,0 +1,19 @@
+baudrate: 1000000
+port: "/dev/ttyUSB0"
+frequency: 50
+joint_mapping: {
+ # r_main_board: 30,
+ # r_w_rotation: 31,
+ # r_w_flexion: 33,
+ # r_th_adduction: 34,
+ # r_th_flexion: 35,
+ # r_ix_flexion: 36,
+ # r_ring_ltl_flexion: 37,
+ l_w_rotation: 41,
+ l_w_flexion: 43,
+ l_th_adduction: 44,
+ l_th_flexion: 45,
+ l_ix_flexion: 46,
+ l_ring_ltl_flexion: 47,
+ l_main_board: 40,
+}

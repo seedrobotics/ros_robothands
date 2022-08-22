@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/lucas/ROBOTIS/DynamixelSDK/DynamixelSDK/ros/devel/setup.sh

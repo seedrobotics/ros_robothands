@@ -1,0 +1,10 @@
+<launch>
+        <node pkg="sensor_pkg" name="seed_fts3_right" type="read_publish_sensor_node.py" output="screen">
+          <rosparam file="$(find sensor_pkg)/config/sensors_right.yaml" />
+        </node>
+<!-- Uncomment this if you want to use 10 sensors. If you want to use the 5 sensors of the left hand, comment the block above then uncomment this one
+        <node pkg="sensor_pkg" name="seed_fts3_left" type="read_publish_sensor_node.py" output="screen">
+          <rosparam file="$(find sensor_pkg)/config/sensors_left.yaml" />
+        </node>
+-->
+</launch>

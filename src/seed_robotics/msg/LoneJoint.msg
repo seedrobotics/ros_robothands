@@ -1,0 +1,13 @@
+string name
+uint8 bus_id
+uint8 stiffness
+uint8 stress_level
+uint16 target_position
+uint16 target_speed
+uint16 torque_limit
+uint16 present_position
+int16 present_speed
+uint8 temperature
+uint8 moving
+uint8 HW_error_condition
+int16 current

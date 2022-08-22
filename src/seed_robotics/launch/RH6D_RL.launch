@@ -1,0 +1,17 @@
+<launch>
+    <param name="light_mode" value="true" />
+    <param name="prefix" value="RL_" />
+    <node pkg="seed_robotics" name="seed_hand" type="hand_handle_node.py" output="screen">
+      <rosparam file="$(find seed_robotics)/config/RH6D_RL.yaml" />
+    </node>
+<!-- Uncomment this if you want to use the left hand sensors. WARN : Remember to edit ../config/sensors_left.yaml file
+    <node pkg="sensor_pkg" name="seed_fts3_left" type="read_publish_sensor_node.py" output="screen">
+    	<rosparam file="$(find sensor_pkg)/config/sensors_left.yaml" />
+    </node>
+-->
+<!-- Uncomment this if you want to use right hand sensors. WARN : Remember to edit ../config/sensors_right.yaml file
+    <node pkg="sensor_pkg" name="seed_fts3_right" type="read_publish_sensor_node.py" output="screen">
+    	<rosparam file="$(find sensor_pkg)/config/sensors_right.yaml" />
+    </node>
+-->
+</launch>

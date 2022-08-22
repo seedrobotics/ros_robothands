@@ -1,0 +1,8 @@
+prefix=/home/lucas/ROBOTIS/DynamixelSDK/DynamixelSDK/ros/devel
+
+Name: seed_robotics
+Description: Description of seed_robotics
+Version: 0.1.0
+Cflags: -I/home/lucas/ROBOTIS/DynamixelSDK/DynamixelSDK/ros/devel/include
+Libs: -L${prefix}/lib 
+Requires: dynamixel_sdk roscpp rospy std_msgs message_generation message_runtime

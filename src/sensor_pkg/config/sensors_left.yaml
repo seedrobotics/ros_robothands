@@ -1,0 +1,3 @@
+port: "/dev/ttyUSB1"
+hand_polarity: "L_"
+sensor_number: 5

@@ -1,0 +1,9 @@
+int8 id
+int64 fx
+int64 fy
+int64 fz
+float64 abs
+float64 yaw
+float64 pitch
+bool is_present
+bool is_3D
