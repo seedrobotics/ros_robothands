@@ -1,0 +1,8 @@
+# Ignore directories
+build/
+devel/share/common-lisp/
+devel/share/gennodejs/
+devel/share/roseus/
+
+# Ignore pyc files
+*.pyc
