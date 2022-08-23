@@ -3,6 +3,13 @@ build/
 devel/share/common-lisp/
 devel/share/gennodejs/
 devel/share/roseus/
+devel/lib/python3
 
 # Ignore pyc files
 *.pyc
+
+#Ignore Irrelevant Python Scripts
+src/timing.py
+src/timing_tests_both.py
+src/timing_tests_RH6D.py
+src/timing_tests_RH8D.py

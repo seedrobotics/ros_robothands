@@ -52,9 +52,6 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
-#    lone_sensor.msg
-#   AllSensors.msg
-#   sensor_user_command.msg
     LoneJoint.msg
     AllJoints.msg
     JointSetSpeedPos.msg
@@ -212,8 +209,16 @@ include_directories(
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
  install(FILES
-   launch/test.launch
-#   launch/sensor.launch
+   launch/RH6D_L.launch
+   launch/RH6D_R.launch
+   launch/RH6D_RL.launch
+   launch/RH7D_L.launch
+   launch/RH7D_R.launch
+   launch/RH7D_RL.launch
+   launch/RH8D_L.launch
+   launch/RH8D_R.launch
+   launch/RH8D_RL.launch
+   launch/RH6D_L_and_RH8D_R_with_sensors.launch
    # myfile2
    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
  )

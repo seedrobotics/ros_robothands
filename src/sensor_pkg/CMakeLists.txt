@@ -194,7 +194,7 @@ catkin_install_python(PROGRAMS
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
  install(FILES
-   launch/sensor.launch
+   launch/Sensors.launch
    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
  )
 
