@@ -1,5 +1,6 @@
 <launch>
-    <param name="prefix" value="R_" />
+  <param name="light_mode" value="false" />
+  <param name="prefix" value="RL_" />
     <node pkg="seed_robotics" name="seed_hand" type="read_write_node.py" output="screen">
       <rosparam file="$(find seed_robotics)/config/test.yaml" />
     </node>

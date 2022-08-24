@@ -13,3 +13,5 @@ src/timing.py
 src/timing_tests_both.py
 src/timing_tests_RH6D.py
 src/timing_tests_RH8D.py
+src/seed_robotics/config/test.yaml
+src/seed_robotics/launch/test.launch

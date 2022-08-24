@@ -38,7 +38,6 @@ else:
         return ch
 
 from dynamixel_sdk import *
-from seed_robotics.srv import *
 from seed_robotics.msg import *
 import std_msgs.msg
 
