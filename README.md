@@ -93,14 +93,33 @@ Then logout and log back for the changes to take effect.
 ################## SENSOR_PKG MESSAGE STRUCTURE################
 ###############################################################
 
+![plot](./docImages/Sensor_messages.png)
+
 ################## USER SAMPLES FOR SENSOR_PKG ################
 ###############################################################
+
+As said, there are 4 user code samples for you to have to examples on how to interact with the sensor_pkg package.
+These examples are located in the src/sensor_pkg/user_example folder.
+
+The first one is user_sample_1_read_values.py. This script first sends a command to calibrate the sensors. Then it gets data from the sensors about the force on the X, Y and Z axis and display them on the terminal as they are received.
+
+The second one is user_sample_2_abs_pitch_yaw.py. This script does the same as the first one, but instead of using the cartesian coordinates data, it uses the spherical coordinates data (abs, yaw, pitch).
+
+The third one is user_sample_3_setfreq_calibrate.py. This script sends a command to the sensor in order to calibrate them and set the output frequency to 20Hz.
+
+The fourth one is user_sample_4_diagnosis_request.py. This script simply sends a diagnosis request to the sensor.
+
+The best way learn how to use the SENSOR_PKG is to play a bit with these samples and understand how to interact with the sensors data
 
 ################# SEED_ROBOTICS FEATURES ######################
 ###############################################################
 
 ################## SEED_ROBOTICS MESSAGE STRUCTURE#############
 ###############################################################
+
+![plot](./docImages/WriteMessages.png)
+![plot](./docImages/ReadMessages.png)
+
 
 ################## USER SAMPLES FOR SEED_ROBOTICS #############
 ###############################################################
