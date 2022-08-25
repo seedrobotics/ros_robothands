@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample to clear the stiffness on one or several joints
+# User sample to clear the stiffness on one or several joints on a Right Hand
 
 import rospy
 import std_msgs.msg
@@ -19,8 +19,8 @@ message_to_send = JointListSetStiffness()
 # Declaring a list to store the names of the joints we want to send command to
 joint_names = ['r_w_rotation','r_w_flexion','r_th_adduction','r_th_flexion','r_ix_flexion','r_ring_ltl_flexion']
 # Declaring a list to store the different stiffness values we want for each joint
-# Note : Stiffness value must be between #TODO and #TODO
-stiffness_values_list = [1, 2, 1, 2, 1, 2]
+# Note : Stiffness value must be between 1 and 9
+stiffness_values_list = [1, 9, 8, 4, 6, 7]
 # Assign the name and stiffness value of the joints to each SetStiffness message in the joint_message_list
 for name, stiffness, joint in zip(joint_names, stiffness_values_list, joint_message_list):
     joint.name = name

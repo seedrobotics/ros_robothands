@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# This sample assumes you are using a Right Hand. If not, change the R_sensor_user_command Topic name to L_sensor_user_command
 # User sample code that sends a command to calibrate the sensor and sets its frequency to a new one.
 
 import rospy
@@ -11,7 +11,7 @@ DESIRED_FREQUENCY = 20          #20Hz, can be changed with values between 1 and 
 
 # Initialize ros node
 rospy.init_node('user_talker', anonymous = True)
-# Initialize a publisher to sensor_user_command to be able to send command to the sensors
+# Initialize a publisher to R_sensor_user_command to be able to send command to the sensors
 pub = rospy.Publisher('R_sensor_user_command', sensor_user_command, queue_size = 10)
 # Defining a sensor_user_command message to fill it with the needed Command
 command = sensor_user_command()

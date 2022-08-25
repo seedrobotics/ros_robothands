@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample to clear the hardware error on a given joint
+# User sample to clear the hardware error on a given joint on a Right Hand
 
 import rospy
 import std_msgs.msg

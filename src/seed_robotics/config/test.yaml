@@ -1,7 +1,7 @@
 # If you are only using one hand, please comment the unused parts of the joint_mapping dictionary
 # For example if you are only using a RH8D right hand, comment every tuple with a key starting with 'l'
 baudrate: 1000000
-port: "/dev/ttyUSB1"
+port: "/dev/ttyUSB0"
 frequency: 50
 joint_mapping: {
  r_main_board: 50,
@@ -14,10 +14,12 @@ joint_mapping: {
  r_middle_flexion: 57,
  r_ring_ltl_flexion: 58,
  l_w_rotation: 41,
+ l_w_adduction: 14,
  l_w_flexion: 43,
  l_th_adduction: 44,
  l_th_flexion: 45,
  l_ix_flexion: 46,
  l_ring_ltl_flexion: 47,
+ l_middle_flexion: 16,
  l_main_board: 40,
 }

@@ -242,6 +242,8 @@ while not rospy.is_shutdown():
             # Continuously check each sensor's value to see if the value is above the threshold
             for sensor in sensor_list:
                 joint_name = getNameFromSensorID(sensor.id)
+                # If the id is 3 or 4, the sensor is on the ring or little finger
+                # If so, we divide the value by 2 because only 1 joint corresponds to these 2 sensors, so we average the value
                 if sensor.id == 3:
                     abs_val = (sensor.abs + sensor_list[4].abs)/2
                 if sensor.id == 4:
@@ -252,42 +254,27 @@ while not rospy.is_shutdown():
                 # If the value is above the threshold, get the corresonding joint's name
                     corresponding_joint = [joint for joint in joint_list if joint.name == joint_name]
                     if corresponding_joint:
-                    # Then set its target position to its current position
+                    # Compute the gain
                         gain = computeGain(abs_val)
+                    # Set its target position to a lower value
                         decreaseStress(corresponding_joint[0],gain)
                         time.sleep(TIME_DELAY)
                 elif abs_val < ACCEPTABLE_LOW:
+                # If the value is below the threshold
                     if not (joint_name in list_joints_too_far):
-                # If that joint is not already in the list of stressed joint, find it in joint_list
+                # If that joint is not already at its minimum position
+                # Find its name
                         corresponding_joint = [joint for joint in joint_list if joint.name == joint_name]
                         if corresponding_joint:
+                    # Compute the gain
                             gain = computeGain(abs_val)
+                    # Increasae its target position
                             increaseStress(corresponding_joint[0],gain)
                             time.sleep(TIME_DELAY)
                 else:
+                    # If the value is inside our wanted pressure interval
                     corresponding_joint = [joint for joint in joint_list if joint.name == joint_name]
                     if corresponding_joint:
+                        # Set its target position to its current position
                         stopStressing(corresponding_joint[0])
                         time.sleep(TIME_DELAY)
-    # # Continuously check every joint's current to see if one's current is above the current limit.
-    # for joint in joint_list:
-    #     #print("Current in Joint %s is : %d" % (joint.name,joint.current))
-    #     if joint.current > CURRENT_LIMIT:
-    #         # If current is above current limit and the joint has not been told to stop forcing yet :
-    #         if not (joint.name in list_stressed_joints):
-    #             # Set its target position to its current position
-    #             stopStressing(joint)
-    #             # Add the joint the the list_stressed_joints
-    #             list_stressed_joints.append(joint.name)
-    #             print(list_stressed_joints)
-
-    # If every joints have received the command to set their target position to their present position
-    # if len(list_stressed_joints) >= 3:
-    #     # Hold the object for 5 more seconds
-    #     time.sleep(5)
-    #     # Then build and send the message to open every finger
-    #     message = buildSpeedPosMsg(names_step_3, target_positions_step_3, target_speeds_step_3)
-    #     print(message)
-    #     pub.publish(message)
-    #     # Quit the script, mission accomplished.
-    #     quit()

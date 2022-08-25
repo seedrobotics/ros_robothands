@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# This sample assumes you are using a Right Hand. If not, change the R_sensor_user_command Topic name to L_sensor_user_command
 # User sample code that sends a command to request sensor diagnosis and prints the answer
 
 import rospy

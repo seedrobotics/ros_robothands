@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample to set the shutdown conditions on a given joint
+# User sample to set the shutdown conditions on a given joint of a Right Hand
 # The shutdown conditions of joint are temperature and overload
 # By default, temperature and overload are shutdown conditions
 # In this sample, we will disable them

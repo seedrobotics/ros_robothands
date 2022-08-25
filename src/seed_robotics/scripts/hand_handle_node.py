@@ -125,7 +125,7 @@ except KeyError:
     pass
 
 if LIGHT_MODE:
-    LEN_SYNC_READ = 19
+    LEN_SYNC_READ = 10
 
 try:
     PREFIX = rospy.get_param("/prefix")
@@ -221,7 +221,7 @@ class Joint:
             rospy.logwarn("Joint with ID %d has not met its mapping, name set to 'None'", self.info.id)
 
     bus_id = 0
-    stiffness = 0
+    stiffness = 8
     stress_level = 0
     target_pos = 0
     target_speed = 0
@@ -307,7 +307,7 @@ security_list = []
 
 timing_write_list = []
 exceeding_timing_list = []
-
+timing_list = []
 # Open port
 try:
    portHandler.openPort()
@@ -453,8 +453,13 @@ def setStiffnessCallback(JointListSetStiffness):
                 dxl_write_params_stiffness.append(param)
                 perm_param = [DXL_LOBYTE(DXL_LOWORD(PERMISSION_ENABLE))]
                 dxl_permission_param.append(perm_param)
+                # Change the stiffness value in the local
                 # hex_list = [hex(param[0]),hex(param[1]),hex(param[2])]
                 # rospy.loginfo(hex_list)
+                joint_pos = [index for (index,item) in enumerate(joints) if item.name == joint.name]
+                index = joint_pos[0]
+                joints[index].stiffness = joint.stiffness
+                #SET STIFFNESS DANS joints[]
             else:
                 rospy.logwarn("Stiffness value out of range, try with a value between 0 and 254")
                 return
@@ -597,16 +602,17 @@ def fillROSJointsMessages():
         lone_joint.name = joints[index].name
         lone_joint.bus_id = joints[index].bus_id
         lone_joint.stiffness = joints[index].stiffness
-        lone_joint.stress_level = joints[index].stress_level
         lone_joint.target_position = joints[index].target_pos
         lone_joint.target_speed = joints[index].target_speed
         lone_joint.torque_limit = joints[index].torque_limit
         lone_joint.present_position = joints[index].pres_pos
-        lone_joint.present_speed = joints[index].pres_speed
         lone_joint.temperature = joints[index].temperature
-        lone_joint.moving = joints[index].moving
         lone_joint.HW_error_condition = joints[index].HW_err_cond
-        lone_joint.current = joints[index].pres_current
+        lone_joint.present_speed = joints[index].pres_speed
+        if not LIGHT_MODE:
+            lone_joint.stress_level = joints[index].stress_level
+            lone_joint.moving = joints[index].moving
+            lone_joint.current = joints[index].pres_current
 
     # Once every lone_joint_list element is filled, fill the alljoints_msg that will be sent
     alljoints_msg.header.stamp = rospy.Time.now()
@@ -709,6 +715,8 @@ for i in joints:
 # Define the period with the FREQUENCY given by the user in the launchfile
 PERIOD = 1000 / FREQUENCY #ms
 
+
+
 # MAIN LOOP
 while not rospy.is_shutdown() :
 
@@ -737,10 +745,12 @@ while not rospy.is_shutdown() :
         joint.torque_limit = groupSyncRead.getData(id, ADDR_TORQUE_LIMIT, LEN_TORQUE_LIMIT)
         joint.pres_pos = groupSyncRead.getData(id, ADDR_PRESENT_POSITION, LEN_PRESENT_POSITION)
         joint.pres_speed = groupSyncRead.getData(id, ADDR_PRESENT_SPEED, LEN_PRESENT_SPEED)
-        joint.temperature = groupSyncRead.getData(id, ADDR_TEMPERATURE, LEN_TEMPERATURE)
-        joint.moving = groupSyncRead.getData(id, ADDR_MOVING, LEN_MOVING)
-        joint.HW_err_cond = groupSyncRead.getData(id, ADDR_HW_ERROR_COND, LEN_HW_ERROR_COND)
         if not LIGHT_MODE:
+            joint.temperature = groupSyncRead.getData(id, ADDR_TEMPERATURE, LEN_TEMPERATURE)
+            joint.moving = groupSyncRead.getData(id, ADDR_MOVING, LEN_MOVING)
+            joint.HW_err_cond = groupSyncRead.getData(id, ADDR_HW_ERROR_COND, LEN_HW_ERROR_COND)
+            if joint.HW_err_cond != 0:
+                rospy.logwarn("Joint %s currently has hardware error %d" % (joint.name,joint.HW_error_condition))
             joint.overload_filter_value = groupSyncRead.getData(id, ADDR_OL_FILTER_VALUE, LEN_OL_FILTER_VALUE)
             joint.pres_current = groupSyncRead.getData(id, ADDR_CURRENT, LEN_CURRENT)
             joint.set_stress_level(joint.info.OL_filt_threshold, joint.info.current_limit)
@@ -752,6 +762,10 @@ while not rospy.is_shutdown() :
     #rospy.loginfo(alljoints_msg)
 
     if LIGHT_MODE:
+        # cycle_time = time.time_ns()/1000000 - Cycle_Start
+        # timing_list.append(cycle_time)
+        # if len(timing_list) > 3000:
+        #     rospy.loginfo(timing_list)
         if time.time_ns()/1000000 > Cycle_End:
             exceeding_time_ms = time.time_ns()/1000000 - Cycle_End
             rospy.logwarn("TIME PERIOD EXCEEDED. Time exceeded by %d ms" % exceeding_time_ms)

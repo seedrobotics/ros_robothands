@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample code that gets data from each joint and display them continuously
+# User sample code that gets data from each joint and display them continuously. Sample example for the use of a single Right Hand
 
 import rospy
 import std_msgs.msg
@@ -15,6 +15,7 @@ def jointsCallback(joints_data):
     for joint in joints_data.joints:
         print("Joint name : %s" % joint.name)
         print("Joint ID : %d" % joint.bus_id)
+        print("Joint stiffness is : %d" % joint.stiffness)
         print("Stress Level : %d" % joint.stress_level)
         print("Target Position : %d" % joint.target_position)
         print("Target Speed : %d" % joint.target_speed)
@@ -29,7 +30,7 @@ def jointsCallback(joints_data):
 # Initialize a ROS Node
 rospy.init_node('Joints_listener', anonymous = True)
 # Subscribe to the Joints Topic to receive AllJoints messages that will be processed by the jointsCallback function
-# Note that the Topic name MUST be 'Joints'
+# Note that the Topic name MUST be 'R_Joints' if you are using a Right Hand
 rospy.Subscriber("R_Joints", AllJoints, jointsCallback)
 
 

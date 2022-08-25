@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample to set target position and target speed to a list of joints
+# User sample to set target position and target speed to a list of joints. Sample for a RH8D Right Hand
 
 import rospy
 import std_msgs.msg

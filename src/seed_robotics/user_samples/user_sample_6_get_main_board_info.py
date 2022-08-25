@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# User sample code that gets data from each joint and display them continuously
+# User sample code that gets data from a Right Hand's main board.
 
 import rospy
 import std_msgs.msg
