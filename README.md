@@ -19,7 +19,7 @@ In order to work with this package, you must intall ROS Noetic.
 Please follow the instructions on the ROS Wiki website here http://wiki.ros.org/noetic/Installation. Please install the desktop-full version.
 Please note that this version of the package has only been tested on Ubuntu 20.04.
 
-In order to make this package work, you also need to have Python3 installed. This package have been developped using Python 3.8.10.
+In order to make this package work, you also need to have Python3 installed. This package have been developped using Python 3.8.10 (pre-installed in Ubuntu 20.04).
 You also need to install the following python libs :
 - rospy (should have been installed with ROS Noetic)
 - std_msgs (should have been installed with ROS Noetic)
